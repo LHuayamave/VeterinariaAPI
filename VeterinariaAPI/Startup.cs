@@ -1,4 +1,7 @@
-﻿namespace VeterinariaAPI
+﻿using Microsoft.EntityFrameworkCore;
+using VeterinariaAPI.Conexiones;
+
+namespace VeterinariaAPI
 {
     public class Startup
     {
@@ -13,6 +16,9 @@
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
+            services.AddDbContext<veterinariaContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("veterinariaConnection"))
+            );
         }
 
         public void Configure (IApplicationBuilder app, IWebHostEnvironment env)

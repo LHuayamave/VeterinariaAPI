@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-//using VeterinariaAPI.Conexiones;
-//using VeterinariaAPI.Entidades;
+using VeterinariaAPI.Conexiones;
+using VeterinariaAPI.Entidades;
 
 namespace VeterinariaAPI.Controllers
 {
-    /*[Route("api/facturasFormasPagos")]
+    [Route("api/facturasFormasPagos")]
     [ApiController]
     public class TieFacturasFormasPagosController : ControllerBase
     {
@@ -22,12 +22,12 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                return await _context.TieFacturaFormaPagos.Include(x => x.oIdFacturaCabecera).Include(x => x.oIdFormaPago).ToListAsync();
+                return await _context.TieFacturaFormaPagos.ToListAsync();
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
             }
         }
-    }*/
+    }
 }

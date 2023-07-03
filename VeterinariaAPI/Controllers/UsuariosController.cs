@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-//using VeterinariaAPI.Conexiones;
-//using VeterinariaAPI.Entidades;
-//using Microsoft.AspNetCore.Http;
+using VeterinariaAPI.Conexiones;
+using VeterinariaAPI.Entidades;
+using Microsoft.AspNetCore.Http;
 
 namespace VeterinariaAPI.Controllers
 {
-    /*[ApiController]
+    [ApiController]
     [Route("api/usuarios")]
     public class UsuariosController : ControllerBase
     {
@@ -28,7 +28,8 @@ namespace VeterinariaAPI.Controllers
 
         public async Task<ActionResult<List<Usuario>>> Get()
         {
-            try {
+            try
+            {
                 return await _context.Usuarios.ToListAsync();
             }
             catch (Exception ex)
@@ -36,5 +37,5 @@ namespace VeterinariaAPI.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
             }
         }
-    }*/
+    }
 }

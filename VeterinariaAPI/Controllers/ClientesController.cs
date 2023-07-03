@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using VeterinariaAPI.Conexiones;
-using VeterinariaAPI.Entidades;
+//using VeterinariaAPI.Conexiones;
+//using VeterinariaAPI.Entidades;
 using Microsoft.AspNetCore.Http;
 
 namespace VeterinariaAPI.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/clientes")]
     public class ClientesController : ControllerBase
     {
@@ -35,5 +35,5 @@ namespace VeterinariaAPI.Controllers
             }
         }
 
-    }
+    }*/
 }

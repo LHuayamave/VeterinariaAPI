@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using VeterinariaAPI.Conexiones;
+//using VeterinariaAPI.Conexiones;
 
 namespace VeterinariaAPI
 {
@@ -17,9 +17,9 @@ namespace VeterinariaAPI
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            services.AddDbContext<veterinariaContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("veterinariaConnection"))
-            );
+            //services.AddDbContext<veterinariaContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("veterinariaConnection"))
+            //);
 
             services.AddControllers().AddJsonOptions(options =>
             {

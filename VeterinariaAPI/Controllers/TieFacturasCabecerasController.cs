@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VeterinariaAPI.Conexiones;
-using VeterinariaAPI.Entidades;
+//using VeterinariaAPI.Conexiones;
+//using VeterinariaAPI.Entidades;
 
 namespace VeterinariaAPI.Controllers
 {
-    [Route("api/facturasCabeceras")]
+    /*[Route("api/facturasCabeceras")]
     [ApiController]
     public class TieFacturasCabecerasController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                return await _context.TieFacturaCabeceras.Include(x => x.oIdCliente).Include(x => x.oIdEmpresa).Include(x => x.oIdUsuario).ToListAsync();
+                return await _context.TieFacturaCabeceras.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -30,11 +30,11 @@ namespace VeterinariaAPI.Controllers
             }
         }
 
-        /*[HttpPost]
-        [Route("listado")]
+        
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<List<TieFacturaCabecera>>> Get(int id)
+        [HttpGet]
+        [Route("obtener/{id:int}")]
+        public async Task<ActionResult<TieFacturaCabecera>> Get(int id)
         {
             var facturaCabecera = await _context.TieFacturaCabeceras.FirstOrDefaultAsync(x => x.IdFacturaCabecera == id);
 
@@ -44,7 +44,7 @@ namespace VeterinariaAPI.Controllers
             }
             return facturaCabecera;
   
-        }*/
+        }
 
-    }
+    }*/
 }

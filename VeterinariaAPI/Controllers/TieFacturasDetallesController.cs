@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VeterinariaAPI.Conexiones;
-using VeterinariaAPI.Entidades;
+//using VeterinariaAPI.Conexiones;
+//using VeterinariaAPI.Entidades;
 
 namespace VeterinariaAPI.Controllers
 {
-    [Route("api/facturasDetalles")]
+    /*[Route("api/facturasDetalles")]
     [ApiController]
     public class TieFacturasDetallesController : ControllerBase
     {
@@ -29,5 +29,5 @@ namespace VeterinariaAPI.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
             }
         }
-    }
+    }*/
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using VeterinariaAPI.Conexiones;
 
 namespace VeterinariaAPI
@@ -16,6 +17,14 @@ namespace VeterinariaAPI
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
+            services.AddDbContext<veterinariaContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("veterinariaConnection"))
+            );
+
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
         }
 
         public void Configure (IApplicationBuilder app, IWebHostEnvironment env)

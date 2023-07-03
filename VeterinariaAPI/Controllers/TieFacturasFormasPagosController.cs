@@ -22,7 +22,7 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                return await _context.TieFacturaFormaPagos.ToListAsync();
+                return await _context.TieFacturaFormaPagos.Include(x => x.oIdFacturaCabecera).Include(x => x.oIdFormaPago).ToListAsync();
             }
             catch (Exception ex)
             {

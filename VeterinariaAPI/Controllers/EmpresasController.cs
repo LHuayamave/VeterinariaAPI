@@ -68,7 +68,7 @@ namespace VeterinariaAPI.Controllers
 
         }
 
-        [HttpPut("actualizar/{id:int}")] // api/autores/#
+        [HttpPut("actualizar/{id:int}")]
         public async Task<ActionResult> Put(TieEmpresa tieEmpresa, int id)
         {
             try

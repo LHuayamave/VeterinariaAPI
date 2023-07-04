@@ -31,20 +31,87 @@ namespace VeterinariaAPI.Controllers
         }
 
 
-
         [HttpGet]
         [Route("obtener/{id:int}")]
         public async Task<ActionResult<TieFacturaCabecera>> Get(int id)
         {
-            var facturaCabecera = await _context.TieFacturaCabeceras.FirstOrDefaultAsync(x => x.IdFacturaCabecera == id);
-
-            if (facturaCabecera == null)
+            try
             {
-                return NotFound();
-            }
-            return facturaCabecera;
+                var facturaCabecera = await _context.TieFacturaCabeceras.FirstOrDefaultAsync(x => x.IdFacturaCabecera == id);
 
+                if (facturaCabecera == null)
+                {
+                    return NotFound();
+                }
+                return facturaCabecera;
+
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+            }
         }
+
+        [HttpPost]
+        [Route("insertar")]
+        public async Task<ActionResult> Post(TieFacturaCabecera facturaCabecera) 
+        {
+            try
+            {
+                _context.Add(facturaCabecera);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+            }
+            
+        }
+
+        //[HttpPut("actualizar/{id:int}")] // api/autores/#
+        //public async Task<ActionResult> Put(TieFacturaCabecera facturaCabecera, int id)
+        //{
+        //    try
+        //    {
+        //        var existe = await _context.TieFacturaCabeceras.AnyAsync(x => x.IdFacturaCabecera == id);
+        //        if (!existe)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        _context.Update(facturaCabecera);
+        //        await _context.SaveChangesAsync();
+        //        return Ok();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+        //    }
+            
+        //}
+
+        //[HttpDelete("eliminar/{id:int}")]
+        //public async Task<ActionResult> Delete(int id)
+        //{
+        //    try
+        //    {
+        //        var existe = await _context.TieFacturaCabeceras.AnyAsync(x => x.IdFacturaCabecera == id);
+        //        if (!existe)
+        //        {
+        //            return NotFound();
+        //        }
+        //        _context.Remove(new TieFacturaCabecera() { IdFacturaCabecera = id });
+        //        await _context.SaveChangesAsync();
+
+        //        return Ok();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+        //    }
+            
+        //}
 
     }
 }

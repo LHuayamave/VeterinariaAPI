@@ -29,5 +29,26 @@ namespace VeterinariaAPI.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("obtener/{id:int}")]
+        public async Task<ActionResult<TieFacturaFormaPago>> Get(int id)
+        {
+            try
+            {
+                var facturaFormaPago = await _context.TieFacturaFormaPagos.FirstOrDefaultAsync(x => x.IdFacturaFormaPago == id);
+
+                if (facturaFormaPago == null)
+                {
+                    return NotFound();
+                }
+                return facturaFormaPago;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+            }
+
+        }
     }
 }

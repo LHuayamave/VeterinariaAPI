@@ -50,5 +50,22 @@ namespace VeterinariaAPI.Controllers
             }
 
         }
+
+        [HttpPost]
+        [Route("insertar")]
+        public async Task<ActionResult> Post(TieFacturaFormaPago tieFacturaFormaPago)
+        {
+            try
+            {
+                _context.Add(tieFacturaFormaPago);
+                await _context.SaveChangesAsync();
+                return Ok();
+
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+            }
+        }
     }
 }

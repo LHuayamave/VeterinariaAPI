@@ -26,7 +26,7 @@ namespace VeterinariaAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+                return Content("Ocurrió un error" + ex.Message);
             }
         }
         [HttpGet]
@@ -44,7 +44,7 @@ namespace VeterinariaAPI.Controllers
                 return facturaDetalle;
             }
             catch(Exception ex) {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+                return Content("Ocurrió un error" + ex.Message);
             }
             
         }
@@ -61,7 +61,7 @@ namespace VeterinariaAPI.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+                return Content("Ocurrió un error" + ex.Message);
             }       
         }
 

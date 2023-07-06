@@ -11,11 +11,11 @@ public partial class TieEmpresa
 
     public string NumDocumento { get; set; }
 
-    public string direccionEmpresa { get; set; }
+    public string DireccionEmpresa { get; set; }
 
-    public string correoEmpresa { get; set; }
+    public string CorreoEmpresa { get; set; }
 
-    public string telefonoEmpresa { get; set; }
+    public string TelefonoEmpresa { get; set; }
 
     public virtual ICollection<TieFacturaCabecera> TieFacturaCabeceras { get; set; } = new List<TieFacturaCabecera>();
 }

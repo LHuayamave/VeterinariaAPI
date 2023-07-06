@@ -57,6 +57,12 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
+                var existeEmpresaMismoNombre = await _context.TieEmpresas.AnyAsync(x => x.NombreEmpresa == tieEmpresa.NombreEmpresa);
+                if (existeEmpresaMismoNombre)
+                {
+                    return BadRequest($"La empresa {tieEmpresa.NombreEmpresa} ya existe");
+                }
+
                 _context.Add(tieEmpresa);
                 await _context.SaveChangesAsync();
                 return Ok();

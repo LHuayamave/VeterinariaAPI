@@ -18,7 +18,7 @@ namespace VeterinariaAPI.Controllers
 
         [HttpGet]
         [Route("listado")]
-        public async Task<ActionResult<List<TieFacturaCabecera>>> Get()
+        public async Task<ActionResult<List<TieFacturaCabecera>>> ObtenerListadoFacturasCabeceras()
         {
             try
             {
@@ -33,7 +33,7 @@ namespace VeterinariaAPI.Controllers
 
         [HttpGet]
         [Route("obtener/{id:int}")]
-        public async Task<ActionResult<TieFacturaCabecera>> Get(int id)
+        public async Task<ActionResult<TieFacturaCabecera>> ObtenerFacturaCabeceraId(int id)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace VeterinariaAPI.Controllers
 
         [HttpPost]
         [Route("insertar")]
-        public async Task<ActionResult> Post(TieFacturaCabecera facturaCabecera) 
+        public async Task<ActionResult> InsertarFacturaCabecera(TieFacturaCabecera facturaCabecera) 
         {
             try
             {

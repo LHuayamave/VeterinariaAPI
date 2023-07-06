@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace VeterinariaAPI.Entidades;
 
@@ -31,13 +32,12 @@ public partial class TieFacturaCabecera
 
     public string Observaciones { get; set; }
 
-    public virtual Cliente IdClienteNavigation { get; set; }
+    public virtual Cliente oIdCliente { get; set; }
+    [JsonIgnore]
+    public virtual TieEmpresa oIdEmpresa { get; set; }
 
-    public virtual TieEmpresa IdEmpresaNavigation { get; set; }
-
-    public virtual Usuario IdUsuarioNavigation { get; set; }
-
+    public virtual Usuario oIdUsuario { get; set; }
     public virtual ICollection<TieFacturaDetalle> TieFacturaDetalles { get; set; } = new List<TieFacturaDetalle>();
-
+    [JsonIgnore]
     public virtual ICollection<TieFacturaFormaPago> TieFacturaFormaPagos { get; set; } = new List<TieFacturaFormaPago>();
 }

@@ -22,7 +22,7 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                return await _context.TieFacturaCabeceras.ToListAsync();
+                return await _context.TieFacturaCabeceras.Include(x => x.oIdCliente).Include(x => x.TieFacturaDetalles).Include(x => x.oIdUsuario).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                var facturaCabecera = await _context.TieFacturaCabeceras.FirstOrDefaultAsync(x => x.IdFacturaCabecera == id);
+                var facturaCabecera = await _context.TieFacturaCabeceras.Include(x => x.oIdCliente).Include(x => x.oIdUsuario).Include(x => x.TieFacturaDetalles).FirstOrDefaultAsync(x => x.IdFacturaCabecera == id);
 
                 if (facturaCabecera == null)
                 {

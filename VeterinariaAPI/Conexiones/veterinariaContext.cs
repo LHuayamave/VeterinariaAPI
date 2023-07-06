@@ -126,17 +126,17 @@ public partial class veterinariaContext : DbContext
             entity.Property(e => e.SubtotalFactura).HasColumnName("subtotalFactura");
             entity.Property(e => e.TotalFactura).HasColumnName("totalFactura");
 
-            entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.TieFacturaCabeceras)
+            entity.HasOne(d => d.oIdCliente).WithMany(p => p.TieFacturaCabeceras)
                 .HasForeignKey(d => d.IdCliente)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TieFacturaCabecera_idCliente");
 
-            entity.HasOne(d => d.IdEmpresaNavigation).WithMany(p => p.TieFacturaCabeceras)
+            entity.HasOne(d => d.oIdEmpresa).WithMany(p => p.TieFacturaCabeceras)
                 .HasForeignKey(d => d.IdEmpresa)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TieFacturaCabecera_idEmpresa");
 
-            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.TieFacturaCabeceras)
+            entity.HasOne(d => d.oIdUsuario).WithMany(p => p.TieFacturaCabeceras)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TieFacturaCabecera_idUsuario");

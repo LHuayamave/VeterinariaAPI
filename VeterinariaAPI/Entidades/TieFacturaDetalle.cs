@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace VeterinariaAPI.Entidades;
 
@@ -16,6 +17,6 @@ public partial class TieFacturaDetalle
     public int CantidadProducto { get; set; }
 
     public double SubtotalProducto { get; set; }
-
+    [JsonIgnore]
     public virtual TieFacturaCabecera IdFacturaCabeceraNavigation { get; set; }
 }

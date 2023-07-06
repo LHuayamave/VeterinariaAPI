@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace VeterinariaAPI.Entidades;
 
@@ -16,6 +17,6 @@ public partial class TieEmpresa
     public string CorreoEmpresa { get; set; }
 
     public string TelefonoEmpresa { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<TieFacturaCabecera> TieFacturaCabeceras { get; set; } = new List<TieFacturaCabecera>();
 }

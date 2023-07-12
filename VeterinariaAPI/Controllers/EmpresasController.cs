@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VeterinariaAPI.Conexiones;
 using VeterinariaAPI.Entidades;
+using VeterinariaAPI.Negocio;
 
 namespace VeterinariaAPI.Controllers
 {
@@ -11,9 +12,11 @@ namespace VeterinariaAPI.Controllers
     public class EmpresasController : ControllerBase
     {
         private readonly veterinariaContext _context;
-        public EmpresasController(veterinariaContext context)
+        //private readonly Validaciones _validaciones;
+        public EmpresasController(veterinariaContext context)//, Validaciones validaciones)
         {
             _context = context;
+            //_validaciones = validaciones;
         }
         [HttpGet]
         [Route("listado")]
@@ -40,7 +43,7 @@ namespace VeterinariaAPI.Controllers
 
                 if (empresa == null)
                 {
-                    return NotFound();
+                    return BadRequest($"No existe una Empresa con el id: {id}");
                 }
                 return empresa;
 
@@ -58,10 +61,17 @@ namespace VeterinariaAPI.Controllers
             try
             {
                 var existeEmpresaMismoNombre = await _context.TieEmpresas.AnyAsync(x => x.NombreEmpresa == tieEmpresa.NombreEmpresa);
-                if (existeEmpresaMismoNombre)
+                var existeEmpresaMismoNumDocumento = await _context.TieEmpresas.AnyAsync(x => x.NumDocumento == tieEmpresa.NumDocumento);
+
+                if (existeEmpresaMismoNombre || existeEmpresaMismoNumDocumento)
                 {
-                    return BadRequest($"La empresa {tieEmpresa.NombreEmpresa} ya existe");
+                    return BadRequest("¡Error! Revisar los datos ingresados");
                 }
+
+                //if (await _validaciones.validarNumeroDocumento(tieEmpresa.NumDocumento).ConfigureAwait(false))
+                //{
+                //    return BadRequest("¡Error! Revisar bien los datos ingresados");
+                //}
 
                 _context.Add(tieEmpresa);
                 await _context.SaveChangesAsync();
@@ -80,9 +90,10 @@ namespace VeterinariaAPI.Controllers
             try
             {
                 var existeEmpresa = await _context.TieEmpresas.AnyAsync(x => x.IdEmpresa == id);
+
                 if (!existeEmpresa)
                 {
-                    return NotFound();
+                    return BadRequest($"No existe una Empresa con el id: {id}");
                 }
 
                 _context.Update(tieEmpresa);
@@ -104,7 +115,7 @@ namespace VeterinariaAPI.Controllers
                 var existeEmpresa = await _context.TieEmpresas.AnyAsync(x => x.IdEmpresa == id);
                 if (!existeEmpresa)
                 {
-                    return NotFound();
+                    return BadRequest($"No existe una empresa con el id: {id}"); ;
                 }
                 _context.Remove(new TieEmpresa() { IdEmpresa = id });
                 await _context.SaveChangesAsync();

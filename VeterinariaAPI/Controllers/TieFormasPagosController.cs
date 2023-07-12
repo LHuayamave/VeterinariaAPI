@@ -40,7 +40,7 @@ namespace VeterinariaAPI.Controllers
 
                 if (formaPago == null)
                 {
-                    return NotFound();
+                    return BadRequest($"No existe una forma de pago con el id: {id}");
                 }
                 return formaPago;
             }
@@ -57,6 +57,11 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
+                var existeNombreFormaPago = await _context.TieFormaPagos.AnyAsync(x => x.Nombre == tieFormaPago.Nombre);
+                if (existeNombreFormaPago)
+                {
+                    return BadRequest("Ya existe una forma de pago con ese nombre");
+                }
                 _context.Add(tieFormaPago);
                 await _context.SaveChangesAsync();
                 return Ok();
@@ -67,15 +72,20 @@ namespace VeterinariaAPI.Controllers
             }
         }
 
-        [HttpPut("actualizar/{id:int}")] // api/actualizar/#
+        [HttpPut("actualizar/{id:int}")]
         public async Task<ActionResult> Put(int id, TieFormaPago tieFormaPago)
         {
             try
             {
                 var existeFormaPago = await _context.TieFormaPagos.AnyAsync(x => x.IdFormaPago == id);
+                var existeNombreFormaPago = await _context.TieFormaPagos.AnyAsync(x => x.Nombre == tieFormaPago.Nombre);
                 if (!existeFormaPago)
                 {
-                    return NotFound();
+                    return BadRequest($"No existe una forma de pago con el id {id}");
+                }
+                if (existeNombreFormaPago)
+                {
+                    return BadRequest("Ya existe una forma de pago con los datos ingresados");
                 }
                 _context.Update(tieFormaPago);
                 await _context.SaveChangesAsync();
@@ -95,7 +105,7 @@ namespace VeterinariaAPI.Controllers
                 var existeFormaPago = await _context.TieFormaPagos.AnyAsync(x => x.IdFormaPago == id);
                 if (!existeFormaPago)
                 {
-                    return NotFound();
+                    return BadRequest($"No existe una forma de pago con el id {id}");
                 }
                 _context.Remove(new TieFormaPago() { IdFormaPago = id });
                 await _context.SaveChangesAsync();
@@ -107,7 +117,6 @@ namespace VeterinariaAPI.Controllers
             {
                 return Content("Ocurrió un error" + ex.Message);
             }
-
         }
     }
 }

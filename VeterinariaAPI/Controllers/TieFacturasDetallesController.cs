@@ -64,44 +64,5 @@ namespace VeterinariaAPI.Controllers
                 return Content("Ocurrió un error" + ex.Message);
             }       
         }
-
-        //[HttpPut("actualizar/{id:int}")] // api/actualizar/#
-        //public async Task<ActionResult> Put(int id, TieFacturaDetalle facturaDetalle)
-        //{
-        //    try
-        //    {
-        //        var existe = await _context.TieFacturaDetalles.AnyAsync(x => x.IdFacturaDetalle == id);
-        //        if (!existe)
-        //        {
-        //            return NotFound();
-        //        }
-        //        _context.Update(facturaDetalle);
-        //        await _context.SaveChangesAsync();
-        //        return Ok();
-        //    }
-        //    catch(Exception ex) {
-        //        return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
-        //    }  
-        //}
-
-        //[HttpDelete("eliminar/{id:int}")]
-        //public async Task<ActionResult> Delete(int id)
-        //{
-        //    try {
-        //        var existe = await _context.TieFacturaDetalles.AnyAsync(x => x.IdFacturaDetalle == id);
-        //        if (!existe)
-        //        {
-        //            return NotFound();
-        //        }
-        //        _context.Remove(new TieFacturaDetalle() { IdFacturaDetalle = id });
-        //        await _context.SaveChangesAsync();
-
-        //        return Ok();
-
-        //    } catch (Exception ex) {
-        //        return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
-        //    }
-            
-        //}
     }
 }

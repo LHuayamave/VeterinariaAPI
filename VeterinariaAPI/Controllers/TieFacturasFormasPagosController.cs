@@ -40,7 +40,7 @@ namespace VeterinariaAPI.Controllers
 
                 if (facturaFormaPago == null)
                 {
-                    return NotFound();
+                    return BadRequest($"No existe una Factura Forma Pago con el id: {id}");
                 }
                 return facturaFormaPago;
             }

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace VeterinariaAPI.Entidades;
 
-public partial class Cliente
+public partial class Usuario
 {
-    public int IdCliente { get; set; }
+    public int IdUsuario { get; set; }
 
-    public string NombreCliente { get; set; }
-
-    public string NumDocumentoCliente { get; set; }
+    public string NombreUsuario { get; set; }
 
     public virtual ICollection<TieFacturaCabecera> TieFacturaCabeceras { get; set; } = new List<TieFacturaCabecera>();
 }

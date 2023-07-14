@@ -29,6 +29,7 @@ namespace VeterinariaAPI
 
             services.AddScoped<ValidacionesFacturaCabecera>();
             services.AddScoped<ValidacionesEmpresa>();
+            services.AddScoped<ValidacionesFormaPago>();
         }
 
         public void Configure (IApplicationBuilder app, IWebHostEnvironment env)

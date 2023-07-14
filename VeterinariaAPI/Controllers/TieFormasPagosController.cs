@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VeterinariaAPI.Conexiones;
 using VeterinariaAPI.Entidades;
+using VeterinariaAPI.Negocio;
 
 namespace VeterinariaAPI.Controllers
 {
@@ -11,9 +12,11 @@ namespace VeterinariaAPI.Controllers
     public class TieFormasPagosController : ControllerBase
     {
         private readonly veterinariaContext _context;
-        public TieFormasPagosController(veterinariaContext context)
+        private readonly ValidacionesFormaPago _validacionesFormaPago;
+        public TieFormasPagosController(veterinariaContext context, ValidacionesFormaPago validacionesFormaPago)
         {
             _context = context;
+            _validacionesFormaPago = validacionesFormaPago;
         }
 
         [HttpGet]
@@ -57,8 +60,8 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                var existeNombreFormaPago = await _context.TieFormaPagos.AnyAsync(x => x.Nombre == tieFormaPago.Nombre);
-                if (existeNombreFormaPago)
+                bool existeMismoNombrePago = await _validacionesFormaPago.validarNombreFormaPago(tieFormaPago);
+                if (existeMismoNombrePago)
                 {
                     return BadRequest("Ya existe una forma de pago con ese nombre");
                 }

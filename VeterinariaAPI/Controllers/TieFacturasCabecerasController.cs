@@ -61,7 +61,6 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                //var existeNumeroFactura = await _context.TieFacturaCabeceras.AnyAsync(x => x.NumeroFactura == facturaCabecera.NumeroFactura);
                 bool existeNumeroFactura = await _validacionesFacturaCabecera.validarNumeroDocumento(facturaCabecera);
                 if (existeNumeroFactura)
                 {

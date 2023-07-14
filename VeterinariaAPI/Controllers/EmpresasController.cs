@@ -12,11 +12,13 @@ namespace VeterinariaAPI.Controllers
     public class EmpresasController : ControllerBase
     {
         private readonly veterinariaContext _context;
-        //private readonly Validaciones _validaciones;
-        public EmpresasController(veterinariaContext context)//, Validaciones validaciones)
+        private readonly ValidacionesEmpresa _validacionesEmpresa;
+
+        public EmpresasController(veterinariaContext context, ValidacionesEmpresa validacionesEmpresa)
         {
             _context = context;
-            //_validaciones = validaciones;
+            _validacionesEmpresa = validacionesEmpresa;
+
         }
         [HttpGet]
         [Route("listado")]
@@ -60,18 +62,12 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                var existeEmpresaMismoNombre = await _context.TieEmpresas.AnyAsync(x => x.NombreEmpresa == tieEmpresa.NombreEmpresa);
-                var existeEmpresaMismoNumDocumento = await _context.TieEmpresas.AnyAsync(x => x.NumDocumento == tieEmpresa.NumDocumento);
-
-                if (existeEmpresaMismoNombre || existeEmpresaMismoNumDocumento)
+                bool existeMismoNombre = await _validacionesEmpresa.validarNombreEmpresa(tieEmpresa);
+                bool existeNumeroDocumento = await _validacionesEmpresa.validarNumeroDocumento(tieEmpresa);
+                if (existeMismoNombre || existeNumeroDocumento)
                 {
                     return BadRequest("¡Error! Revisar los datos ingresados");
                 }
-
-                //if (await _validaciones.validarNumeroDocumento(tieEmpresa.NumDocumento).ConfigureAwait(false))
-                //{
-                //    return BadRequest("¡Error! Revisar bien los datos ingresados");
-                //}
 
                 _context.Add(tieEmpresa);
                 await _context.SaveChangesAsync();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VeterinariaAPI.Entidades;
-using VeterinariaAPI.Servicios;
+using VeterinariaAPI.Negocio;
 
 namespace VeterinariaAPI.Controllers
 {

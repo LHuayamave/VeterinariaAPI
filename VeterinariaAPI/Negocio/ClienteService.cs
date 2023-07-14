@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VeterinariaAPI.Entidades;
 
-namespace VeterinariaAPI.Services
+namespace VeterinariaAPI.Negocio
 {
     public class ClienteService
     {

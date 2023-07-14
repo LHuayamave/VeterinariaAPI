@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VeterinariaAPI.Conexiones;
 using VeterinariaAPI.Entidades;
+using VeterinariaAPI.Negocio;
 
 namespace VeterinariaAPI.Controllers
 {
@@ -11,9 +12,12 @@ namespace VeterinariaAPI.Controllers
     public class TieFacturasCabecerasController : ControllerBase
     {
         private readonly veterinariaContext _context;
-        public TieFacturasCabecerasController(veterinariaContext context)
+        private readonly ValidacionesFacturaCabecera _validacionesFacturaCabecera;
+
+        public TieFacturasCabecerasController(veterinariaContext context, ValidacionesFacturaCabecera validacionesFacturaCabecera)
         {
             _context = context;
+            _validacionesFacturaCabecera = validacionesFacturaCabecera;
         }
 
         [HttpGet]
@@ -57,7 +61,8 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                var existeNumeroFactura = await _context.TieFacturaCabeceras.AnyAsync(x => x.NumeroFactura == facturaCabecera.NumeroFactura);
+                //var existeNumeroFactura = await _context.TieFacturaCabeceras.AnyAsync(x => x.NumeroFactura == facturaCabecera.NumeroFactura);
+                bool existeNumeroFactura = await _validacionesFacturaCabecera.validarNumeroDocumento(facturaCabecera);
                 if (existeNumeroFactura)
                 {
                     return BadRequest("El numero de factura ingresado ya existe");

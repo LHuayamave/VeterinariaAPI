@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using VeterinariaAPI.Entidades;
 
-namespace VeterinariaAPI.Conexiones;
+namespace VeterinariaAPI;
 
 public partial class veterinariaContext : DbContext
 {
@@ -16,7 +16,9 @@ public partial class veterinariaContext : DbContext
     {
     }
 
-    public virtual DbSet<Cliente> Clientes { get; set; }
+    public virtual DbSet<GesCliente> GesClientes { get; set; }
+    public virtual DbSet<GesPaciente> GesPacientes { get; set; }
+    public virtual DbSet<GesTipoPaciente> GesTipoPacientes { get; set; }
 
     public virtual DbSet<TieEmpresa> TieEmpresas { get; set; }
 
@@ -34,23 +36,174 @@ public partial class veterinariaContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Cliente>(entity =>
+        modelBuilder.Entity<GesCliente>(entity =>
         {
-            entity.HasKey(e => e.IdCliente).HasName("PK__Cliente__885457EE8E9918C1");
+            entity.HasKey(e => e.idCliente).HasName("PK__GesClien__885457EEBA7D11CA");
 
-            entity.ToTable("Cliente");
+            entity.ToTable("GesCliente");
 
-            entity.Property(e => e.IdCliente).HasColumnName("idCliente");
-            entity.Property(e => e.NombreCliente)
+            entity.ToTable(tb => tb.HasTrigger("ActualizarFechaActualizacion"));
+            entity.ToTable(tb => tb.HasTrigger("EliminacionLogica"));
+            entity.ToTable(tb => tb.HasTrigger("InsertarEstado"));
+            entity.ToTable(tb => tb.HasTrigger("InsertarFechaCreacion"));
+
+            entity.Property(e => e.idCliente).HasColumnName("idCliente");
+
+            entity.Property(e => e.numDocumento)
+                .IsRequired()
+                .HasMaxLength(13)
+                .IsUnicode(false)
+                .HasColumnName("numDocumento");
+
+            entity.Property(e => e.nombreCliente)
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("nombreCliente");
-            entity.Property(e => e.NumDocumentoCliente)
-                .IsRequired()
-                .HasMaxLength(13)
+
+            entity.Property(e => e.apellidoCliente)
+            .IsRequired()
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasColumnName("numDocumentoCliente");
+                .HasColumnName("apellidoCliente");
+
+            entity.Property(e => e.fechaNac)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaNac");
+
+            entity.Property(e => e.telefono)
+            .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("telefono");
+
+            entity.Property(e => e.direccion)
+            .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("direccion");
+
+            entity.Property(e => e.correo)
+            .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("correo");
+
+            entity.Property(e => e.estadoCliente)
+            .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("estadoCliente");
+
+            entity.Property(e => e.fechaCreacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaCreacion");
+
+            entity.Property(e => e.fechaActualizacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaActualizacion");
+
+            entity.Property(e => e.fechaEliminacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaEliminacion");
+
+
+        });
+
+        modelBuilder.Entity<GesPaciente>(entity =>
+        {
+            entity.HasKey(e => e.idPaciente).HasName("PK__GesPacie__F48A08F2847BD77D");
+            entity.ToTable("GesPaciente");
+
+            entity.Property(e => e.idPaciente).HasColumnName("idPaciente");
+
+            entity.Property(e => e.nombrePaciente)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("nombrePaciente");
+
+            entity.Property(e => e.fechaNac)
+                .IsRequired()
+                .HasColumnType("date")
+                .HasColumnName("fechaNac");
+
+            entity.Property(e => e.raza)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("raza");
+
+            entity.Property(e => e.idTipoPaciente)
+                .IsRequired()
+                .HasColumnName("idTipoPaciente");
+
+            entity.Property(e => e.idCliente)
+            .IsRequired()
+                .HasColumnName("idCliente");
+
+            entity.Property(e => e.estadoPaciente)
+                .HasMaxLength(1)
+                .IsUnicode(false)
+                .HasColumnName("estadoPaciente");
+
+            entity.Property(e => e.fechaCreacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaCreacion");
+
+            entity.Property(e => e.fechaActualizacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaActualizacion");
+
+            entity.Property(e => e.fechaEliminacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaEliminacion");
+
+            entity.Property(e => e.edad)
+                .HasMaxLength(3)
+                .IsUnicode(false)
+                .HasColumnName("edad");
+
+            entity.HasOne(d => d.TipoPaciente)
+                .WithMany(p => p.GesPacientes)
+                .HasForeignKey(d => d.idTipoPaciente)
+                .HasConstraintName("FK__GesPacien__idTip__656C112C");
+
+            entity.HasOne(d => d.Cliente)
+                  .WithMany(c => c.GesPacientes)
+                  .HasForeignKey(p => p.idCliente)
+                  .HasConstraintName("FK__GesPacien__idCli__6477ECF3");
+        });
+
+        modelBuilder.Entity<GesTipoPaciente>(entity =>
+        {
+            entity.HasKey(e => e.idTipoPaciente).HasName("PK__GesTipoP__C42BE6E13E65EF30");
+
+            entity.ToTable("GesTipoPaciente");
+
+            entity.Property(e => e.idTipoPaciente).HasColumnName("idTipoPaciente");
+
+            entity.Property(e => e.tipoPaciente)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("tipoPaciente");
+
+            entity.Property(e => e.estadoTipoPaciente)
+            .IsRequired()
+                .HasMaxLength(1)
+                .IsUnicode(false)
+                .HasColumnName("estadoTipoPaciente");
+
+            entity.Property(e => e.fechaCreacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaCreacion");
+
+            entity.Property(e => e.fechaActualizacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaActualizacion");
+
+            entity.Property(e => e.fechaEliminacion)
+            .HasColumnType("datetime")
+                .HasColumnName("fechaEliminacion");
         });
 
         modelBuilder.Entity<TieEmpresa>(entity =>
@@ -86,6 +239,8 @@ public partial class veterinariaContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("telefonoEmpresa");
         });
+
+
 
         modelBuilder.Entity<TieFacturaCabecera>(entity =>
         {

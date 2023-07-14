@@ -1,6 +1,4 @@
 using VeterinariaAPI;
-using Microsoft.EntityFrameworkCore;
-//using VeterinariaAPI.Conexiones;
 
 var builder = WebApplication.CreateBuilder(args);
 

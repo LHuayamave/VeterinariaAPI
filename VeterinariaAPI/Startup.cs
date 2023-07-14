@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using VeterinariaAPI.Conexiones;
+using VeterinariaAPI.Services;
 
 namespace VeterinariaAPI
 {
@@ -25,6 +25,8 @@ namespace VeterinariaAPI
             {
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             });
+
+            services.AddScoped<ClienteService>();
         }
 
         public void Configure (IApplicationBuilder app, IWebHostEnvironment env)

@@ -21,6 +21,7 @@ public partial class TieFacturaCabecera
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public string NombreCliente { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]
+    [StringLength(maximumLength: 13, ErrorMessage = "El campo {0} no debe tener mas de {1} caracteres")]
     public string NumDocumentoCliente { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public double? SubtotalFactura { get; set; }

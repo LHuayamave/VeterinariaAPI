@@ -31,7 +31,7 @@ public partial class TieFacturaCabecera
 
     public string Observaciones { get; set; }
 
-    public virtual Cliente IdClienteNavigation { get; set; }
+    public virtual GesCliente IdClienteNavigation { get; set; }
 
     public virtual TieEmpresa IdEmpresaNavigation { get; set; }
 

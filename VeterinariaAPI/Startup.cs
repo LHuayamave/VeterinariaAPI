@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using VeterinariaAPI.Services;
+using VeterinariaAPI.Negocio;
 
 namespace VeterinariaAPI
 {
@@ -27,6 +27,8 @@ namespace VeterinariaAPI
             });
 
             services.AddScoped<ClienteService>();
+            services.AddScoped<PacientesServices>();
+            services.AddScoped<TipoPacienteService>();
         }
 
         public void Configure (IApplicationBuilder app, IWebHostEnvironment env)

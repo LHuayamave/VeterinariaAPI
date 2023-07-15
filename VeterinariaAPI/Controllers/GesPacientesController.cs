@@ -25,7 +25,7 @@ namespace VeterinariaAPI.Controllers
             try
             {
                 return await _context.GesPacientes.ToListAsync();
-            } 
+            }
             catch (Exception ex)
             {
                 return BadRequest("Ocurrió un error" + ex.Message);
@@ -59,8 +59,8 @@ namespace VeterinariaAPI.Controllers
         {
             try
             {
-                bool existePaciente  = await _pacientesServices.ExistePacienteDuplicado(paciente);
-                
+                bool existePaciente = await _pacientesServices.ExistePacienteDuplicado(paciente);
+
                 if (existePaciente)
                 {
                     return BadRequest("Ya existe un paciente con los mismos datos");
@@ -78,7 +78,7 @@ namespace VeterinariaAPI.Controllers
 
         [HttpPut]
         [Route("actualizar/{id:int}")]
-        public async Task<ActionResult> Put(int id, GesPaciente paciente)
+        public async Task<ActionResult> Put(GesPaciente paciente, int id)
         {
             try
             {
@@ -87,6 +87,13 @@ namespace VeterinariaAPI.Controllers
                 if (!pacienteDB)
                 {
                     return NotFound();
+                }
+
+                bool existePaciente = await _pacientesServices.ExistePacienteDuplicado(paciente);
+
+                if (existePaciente)
+                {
+                    return BadRequest("Ya existe un paciente con los mismos datos");
                 }
 
                 _context.Update(paciente);

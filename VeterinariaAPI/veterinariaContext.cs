@@ -113,6 +113,12 @@ public partial class veterinariaContext : DbContext
             entity.HasKey(e => e.idPaciente).HasName("PK__GesPacie__F48A08F2847BD77D");
             entity.ToTable("GesPaciente");
 
+            entity.ToTable(tb => tb.HasTrigger("ActualizarFechaActualizacionPaciente"));
+            entity.ToTable(tb => tb.HasTrigger("EliminacionLogicaPaciente"));
+            entity.ToTable(tb => tb.HasTrigger("InsertarEstadoPaciente"));
+            entity.ToTable(tb => tb.HasTrigger("InsertarFechaCreacionPaciente"));
+
+
             entity.Property(e => e.idPaciente).HasColumnName("idPaciente");
 
             entity.Property(e => e.nombrePaciente)
@@ -178,6 +184,12 @@ public partial class veterinariaContext : DbContext
             entity.HasKey(e => e.idTipoPaciente).HasName("PK__GesTipoP__C42BE6E13E65EF30");
 
             entity.ToTable("GesTipoPaciente");
+
+
+            entity.ToTable(tb => tb.HasTrigger("ActualizarFechaActualizacionTipoPaciente"));
+            entity.ToTable(tb => tb.HasTrigger("EliminacionLogicaTipoPaciente"));
+            entity.ToTable(tb => tb.HasTrigger("InsertarEstadoTipoPaciente"));
+            entity.ToTable(tb => tb.HasTrigger("InsertarFechaCreacionTipoPaciente"));
 
             entity.Property(e => e.idTipoPaciente).HasColumnName("idTipoPaciente");
 

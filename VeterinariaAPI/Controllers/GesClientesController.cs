@@ -90,6 +90,12 @@ namespace VeterinariaAPI.Controllers
                     return NotFound();
                 }
 
+                bool existeCliente = await _clienteService.ExisteClienteDuplicado(cliente);
+                if (existeCliente)
+                {
+                    return BadRequest("Los datos del cliente ya existen en la base de datos");
+                }
+
                 _context.Update(cliente);
                 await _context.SaveChangesAsync();
                 return Ok();

@@ -59,7 +59,7 @@ namespace VeterinariaAPI.Controllers
             {
                 _context.Add(tieFacturaFormaPago);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok("Datos ingresados exitosamente");
 
             }
             catch(Exception ex)

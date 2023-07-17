@@ -67,7 +67,7 @@ namespace VeterinariaAPI.Controllers
                 }
                 _context.Add(tieFormaPago);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok("Datos ingresados exitosamente");
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace VeterinariaAPI.Controllers
                 }
                 _context.Update(tieFormaPago);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok("Datos actualizados exitosamente");
             }
             catch (Exception ex)
             {
@@ -113,7 +113,7 @@ namespace VeterinariaAPI.Controllers
                 _context.Remove(new TieFormaPago() { IdFormaPago = id });
                 await _context.SaveChangesAsync();
 
-                return Ok();
+                return Ok("Datos eliminados exitosamente");
 
             }
             catch (Exception ex)

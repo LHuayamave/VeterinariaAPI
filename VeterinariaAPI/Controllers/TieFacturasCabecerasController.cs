@@ -68,7 +68,7 @@ namespace VeterinariaAPI.Controllers
                 }
                 _context.Add(facturaCabecera);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok("Datos ingresados exitosamente");
             }
             catch(Exception ex)
             {

@@ -71,7 +71,7 @@ namespace VeterinariaAPI.Controllers
 
                 _context.Add(tieEmpresa);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok("Datos ingresados exitosamente");
             }
             catch (Exception ex)
             {

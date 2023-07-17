@@ -23,7 +23,7 @@ namespace VeterinariaAPI.Controllers
         [HttpGet]
         [Route("listado")]
 
-        public async Task<ActionResult<List<TieEmpresa>>> Get()
+        public async Task<ActionResult<List<TieEmpresa>>> ListarEmpresas()
         {
             try
             {
@@ -37,7 +37,7 @@ namespace VeterinariaAPI.Controllers
 
         [HttpGet]
         [Route("obtener/{id:int}")]
-        public async Task<ActionResult<TieEmpresa>> Get(int id)
+        public async Task<ActionResult<TieEmpresa>> ListarEmpresaId(int id)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace VeterinariaAPI.Controllers
 
         [HttpPost]
         [Route("insertar")]
-        public async Task<ActionResult> Post(TieEmpresa tieEmpresa)
+        public async Task<ActionResult> InsertarEmpresa(TieEmpresa tieEmpresa)
         {
             try
             {
@@ -81,16 +81,24 @@ namespace VeterinariaAPI.Controllers
         }
 
         [HttpPut("actualizar/{id:int}")]
-        public async Task<ActionResult> Put(TieEmpresa tieEmpresa, int id)
+        public async Task<ActionResult> ActualizarEmpresa(TieEmpresa tieEmpresa, int id)
         {
             try
             {
-                var existeEmpresa = await _context.TieEmpresas.AnyAsync(x => x.IdEmpresa == id);
+                bool existeIdEmpresa = await _validacionesEmpresa.validarIdEmpresa(tieEmpresa);
 
-                if (!existeEmpresa)
+                if (!existeIdEmpresa)
                 {
                     return BadRequest($"No existe una Empresa con el id: {id}");
                 }
+
+                //bool existeNombreEmpresa = await _validacionesEmpresa.validarNombreEmpresa(tieEmpresa);
+                //bool existeNumeroDocumento = await _validacionesEmpresa.validarNumeroDocumento(tieEmpresa);
+
+                //if (existeNombreEmpresa || existeNumeroDocumento)
+                //{
+                //    return BadRequest("Ya existe una empresa con los datos ingresados");
+                //}
 
                 _context.Update(tieEmpresa);
                 await _context.SaveChangesAsync();
@@ -104,7 +112,7 @@ namespace VeterinariaAPI.Controllers
         }
 
         [HttpDelete("eliminar/{id:int}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> ElimminarEmpresa(int id)
         {
             try
             {

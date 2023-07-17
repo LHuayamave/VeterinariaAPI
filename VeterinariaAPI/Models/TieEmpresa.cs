@@ -13,7 +13,7 @@ public partial class TieEmpresa
     public string NombreEmpresa { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]
     [SoloNumeros]
-    [StringLength(13,MinimumLength = 10, ErrorMessage = "El campo {0} debe tener entre {2} y {1} caracteres")]
+    [StringLength(13,MinimumLength = 13, ErrorMessage = "El campo {0} debe tener {1} caracteres")]
     public string NumDocumento { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public string DireccionEmpresa { get; set; }

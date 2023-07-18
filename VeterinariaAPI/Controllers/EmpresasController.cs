@@ -102,7 +102,7 @@ namespace VeterinariaAPI.Controllers
 
                 _context.Update(tieEmpresa);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok("Datos actualizados exitosamente");
             }
             catch (Exception ex)
             {
@@ -124,7 +124,7 @@ namespace VeterinariaAPI.Controllers
                 _context.Remove(new TieEmpresa() { IdEmpresa = id });
                 await _context.SaveChangesAsync();
 
-                return Ok();
+                return Ok("Datos eliminados exitosamente");
             }
             catch (Exception ex)
             {

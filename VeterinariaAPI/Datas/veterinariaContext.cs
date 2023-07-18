@@ -116,7 +116,7 @@ public partial class veterinariaContext : DbContext
                 .HasColumnName("numDocumentoCliente");
             entity.Property(e => e.NumeroFactura)
                 .IsRequired()
-                .HasMaxLength(10)
+                .HasMaxLength(23)
                 .IsUnicode(false)
                 .HasColumnName("numeroFactura");
             entity.Property(e => e.Observaciones)

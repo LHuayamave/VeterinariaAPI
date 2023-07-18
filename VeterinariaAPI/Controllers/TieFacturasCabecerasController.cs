@@ -72,7 +72,7 @@ namespace VeterinariaAPI.Controllers
             }
             catch(Exception ex)
             {
-                return Content("Ocurrió un error" + ex.Message);
+                return Content("Ocurrió un error " + ex.Message);
             }   
         }
     }

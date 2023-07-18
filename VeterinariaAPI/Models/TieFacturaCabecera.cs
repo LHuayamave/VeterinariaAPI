@@ -14,7 +14,8 @@ public partial class TieFacturaCabecera
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public int IdUsuario { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]
-    [SoloNumeros]
+    [NumeroFactura]
+    [StringLength(maximumLength: 23, ErrorMessage = "El campo {0} debe tener hasta {1} caracteres")]
     public string NumeroFactura { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public DateTime FechaFacturaCreacion { get; set; }
@@ -23,7 +24,7 @@ public partial class TieFacturaCabecera
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public string NombreCliente { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]
-    [SoloNumeros]
+    [NumeroDocumentoCliente]
     [StringLength(13, MinimumLength = 10, ErrorMessage = "El campo {0} debe tener entre {2} y {1} caracteres")]
     public string NumDocumentoCliente { get; set; }
     [Required(ErrorMessage = "El campo {0} es requerido")]

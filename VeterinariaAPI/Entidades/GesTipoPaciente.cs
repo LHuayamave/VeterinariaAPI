@@ -13,6 +13,7 @@ namespace VeterinariaAPI.Entidades
         [Required]
         [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres")]
         [PrimeraLetraMayuscula]
+        [PrimeraLetraIgual]
         public string tipoPaciente { get; set; }
 
         public string? estadoTipoPaciente { get; set; }

@@ -11,7 +11,7 @@ public partial class GesCliente
     public int idCliente { get; set; }
 
     [Required(ErrorMessage = "El campo {0} es requerido")]
-    [StringLength(maximumLength:13, ErrorMessage ="El campo {0} no debe tener mas de {1} caracteres")]
+    [StringLength (13, MinimumLength =10, ErrorMessage ="El campo {0} no debe tener mas de {1} caracteres")]
     [SoloNumeros]
     public string numDocumento { get; set; }
 
